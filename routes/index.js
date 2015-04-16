@@ -5,7 +5,8 @@ var stockTwiit = require('../twiit/stockTwiit');
 var data = { title: "TWR"};
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', data);
+	res.render('index', data);
+	data.response=undefined;
 });
 
 router.get('/success',function(req,res,next) {	//TEST SUCCESS SKIN PAGE
@@ -26,10 +27,12 @@ router.post('/new_twiit', function(req, res, next) {
 	{
 		if(error) {
 			data.response = "Fail";
+			data.image="/images/refuse.jpg";
 			res.redirect('/');
 		}
 		else {
 			data.response = "Success";
+			data.image="/images/valide.png";
 			res.redirect('/');
 		}
 	});
