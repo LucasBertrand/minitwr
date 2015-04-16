@@ -10,11 +10,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/success',function(req,res,next) {	//TEST SUCCESS SKIN PAGE
 	data.response ="Success";
+	data.image="/images/valide.png";
 	res.render('index', data);
 });
 
 router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
 	data.response ="Fail";
+	data.image="/images/refuse.jpg";
 	res.render('index', data);
 });
 
