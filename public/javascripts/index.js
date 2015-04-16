@@ -1,7 +1,10 @@
-var button_submit=document.getElementById("submit");
-var textbox=document.getElementById("twiit");
+var response = document.getElementById("response");
 
-button_submit.addEventListener("focus",function(event)	//RECUPERATION TWIIT
+if(response.innerHTML=="Success")
 {
-	
-});
+	response.style.backgroundColor="#66FF33";
+}
+if(response.innerHTML=="Fail")
+{
+	response.style.backgroundColor="#FE3A3C";
+}
