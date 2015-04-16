@@ -1,7 +1,10 @@
 extends layout
 
 block content
-
 	h1 Bienvenue sur TWR, le nouveau réseau social
-	textarea(id="twiit" , placeholder="Votre twiit")
-	button(id="submit") Envoyer
+	if(response)
+		p=response
+	form(action="/new_twiit",method="POST")
+			input(type="text" name="user_name" placeholder="Votre Pseudo")
+			textarea(name="twiit", placeholder="Votre twiit")
+			button(id="submit") Envoyer
