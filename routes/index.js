@@ -1,11 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var stockTwiit = require('../twiit/stockTwiit');
+var loadTwiit = require('../twiit/loadTwiit');
 
-var data = { title: "TWR"};
+var data;
+data.title = "TWRRO";
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', data);
+	loadTwiit(function(twiitArray) 
+	{
+		data.twiits = twiitArray;
+
+		console.log(data.twiits);
+		res.render('index', data);
+	});
 	data.response=undefined;
 });
 
