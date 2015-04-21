@@ -8,9 +8,39 @@ a {
 }
 
 #response {
-	background-color: red;
 	padding-left:10px;
-	width: 40%;
+	width: 400px;
+	height: 30px;
 	border: 1px solid black;
+	position: relative;
 	border-radius: 5px;
 }
+
+.success{
+	background-color: #66FF33;
+	background-image: url(../images/valide.png);
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+
+.fail{
+	background-color: #FE3A3C;
+	background-image: url(../images/refuse.jpg);
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+
+.success::before {
+	display: block;
+	margin-left: 35px;
+	margin-top: 7px;
+	content: "Votre twiit est chez nous !";
+}
+
+.fail::before{
+	display: block;
+	margin-left: 35px;
+	margin-top: 7px;
+	content: "Ah bah c'est pas bon";
+
+
