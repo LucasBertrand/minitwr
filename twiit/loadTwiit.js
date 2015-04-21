@@ -1,35 +1,42 @@
-var fs = require('fs');
+var fs = require( 'fs' );
 
-var TwiitStruct = function (path)
+/* Create a structure data from twiits's .txt
+ * 
+ * @constructor
+ * @param path {String} the name of the file (ex: 4654548843.txt)
+ */
+function TwiitStruct ( path )
 {
-	this.name;
-	this.message;
-	this.date;
+	// load data thanks to path and extract content
+	var data = fs.readFileSync( __dirname + "/data/" + path, "utf8" );
+	if ( data )
+	{		
+		this.date = new Date( parseInt( path.replace(/.txt/, "" )));
+		this.name = data.slice( data.indexOf( "<" ) + 1, data.indexOf( ">" ));
+		this.message = data.slice( data.indexOf( ">" ) + 1, data.length );
+	}		
 }
 
-TwiitStruct.prototype.load = function(fileName)
+/* Read ./twiit/data content, make a structure data from .txt files
+ * and return an array of stored twiits 
+ * 
+ * @param callback {Function} the callback function
+ */
+module.exports = function ( callback )
 {
-	fs.read(__dirname + "/data/" + fileName, function(error, data)
-	{
-		
-		this.date = new Date(parseInt(fileName.replace(/.txt/, "")));
-		this.name = data.slice(data.indexOf("<") + 1, data.indexOf(">") + 1);
-		this.message = data.slice(data.indexOf(">") + 1, data.length);
-	});
-};
 
-
-module.exports = function (callback)
-{
 	var result = [];
-	fs.readdir(__dirname + "/data/", function(error, files)
+	fs.readdir( __dirname + "/data/", function( error, files )
 	{
-		for (var i = 0; i < files.length; i++)
+		if ( error ) throw error;
+		if ( files )
 		{
-			result.push(new TwiitStruct(files[i]));
+			for ( var i = 0; i < files.length; i++ )
+			{
+				result.push( new TwiitStruct( files[i] ));				
+			}
 		}
-		callback(result);
-	});
-	
+		callback( result );
+	});	
 	
 };
