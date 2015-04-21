@@ -3,6 +3,7 @@ var router = express.Router();
 var stockTwiit = require( '../twiit/stockTwiit' );
 var loadTwiit = require( '../twiit/loadTwiit' );
 
+<<<<<<< .merge_file_nrs31b
 var data = { title: "MiniTwr" };
 
 // Get home page
@@ -10,6 +11,13 @@ router.get('/', function( req, res, next )
 {
 	// get stored twiits (in ../twiit/data) and send it to the client
 	loadTwiit(function( twiitArray ) 
+=======
+var data = {};
+data.title = "TWRRO";
+/* GET home page. */
+router.get('/', function(req, res, next) {
+	loadTwiit(function(twiitArray) 
+>>>>>>> .merge_file_cy20ld
 	{
 		data.twiits = twiitArray;
 		res.render( 'index', data );
