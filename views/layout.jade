@@ -1,10 +1,11 @@
 doctype html
 html
-  head
-    title #{title}   
-    link(href="/images/favicon.png", rel="shortcut icon")
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    img(src="/images/logo_cigogne.png")
-  body
-    block content	
-    script(type='text/javascript', src='/javascripts/index.js')
+	head
+		title #{title}   
+		link(href="/images/favicon.png", rel="shortcut icon")
+		link(rel='stylesheet' media='screen and (max-width: 720px)' href='./stylesheets/mobile.css')
+		link(rel='stylesheet' media='screen and (min-width: 720px)' href='./stylesheets/monitor.css')
+		link(rel='stylesheet' href='./stylesheets/common.css')
+	body
+		block content	
+		script(type='text/javascript', src='/javascripts/index.js')

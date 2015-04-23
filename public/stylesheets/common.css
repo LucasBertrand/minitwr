@@ -1,0 +1,10 @@
+
+.name::after
+{
+	content: " twiit :";
+}
+
+.date::before
+{
+	content: "Le "
+}

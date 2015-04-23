@@ -9,8 +9,8 @@ data.title = "TWRRO";
 router.get('/', function(req, res, next) {
 	loadTwiit(function(twiitArray) 
 	{
-		data.twiits = twiitArray;
-		console.log(data);
+		data.twiits = twiitArray.reverse();
+		
 		res.render('index', data);
 		data.response=undefined;
 	});
