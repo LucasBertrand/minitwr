@@ -10,11 +10,10 @@ router.get('/', function(req, res, next) {
 	loadTwiit(function(twiitArray) 
 	{
 		data.twiits = twiitArray;
-
-		console.log(data.twiits);
+		console.log(data);
 		res.render('index', data);
+		data.response=undefined;
 	});
-	data.response=undefined;
 });
 
 router.get('/success',function(req,res,next) {	//TEST SUCCESS SKIN PAGE

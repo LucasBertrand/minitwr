@@ -1,4 +1,5 @@
-var response = document.getElementById("response");
+/*var response = document.getElementById("response");
+
 
 var res = false;
 
@@ -18,4 +19,4 @@ if(response!=undefined){
 		response.style.backgroundColor="#FE3A3C";
 	}
 }
-
+*/

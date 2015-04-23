@@ -1,9 +1,14 @@
 extends layout
 
 block content
-	h1 Bienvenue sur TWR!
-	p(id="response")
+	h1 Bienvenue sur TWR!s
 	form(action="/new_twiit",method="POST")
-			input(type="text" name="user_name" placeholder="Votre Pseudo")
-			textarea(name="twiit", placeholder="Votre twiit")
-			button(id="submit") Envoyer
+		input(type="text" name="user_name" placeholder="Votre Pseudo")
+		textarea(name="twiit", placeholder="Votre twiit")
+		button(id="submit") Envoyer
+	if response
+		if response == "Success"
+			p(class="response success")
+		else
+			p(class="response fail")
+	

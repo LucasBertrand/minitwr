@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 
-#response {
+.response {
 	padding-left:10px;
 	width: 400px;
 	height: 30px;

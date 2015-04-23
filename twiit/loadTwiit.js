@@ -25,7 +25,7 @@ function TwiitStruct ( path )
 module.exports = function ( callback )
 {
 
-	var result = [];
+	var result = []; 
 	fs.readdir( __dirname + "/data/", function( error, files )
 	{
 		if ( error ) throw error;
