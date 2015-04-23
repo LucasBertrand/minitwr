@@ -1,40 +1,50 @@
-var express = require( 'express' );
+var express = require('express');
 var router = express.Router();
-var stockTwiit = require( '../twiit/stockTwiit' );
-var loadTwiit = require( '../twiit/loadTwiit' );
+var stockTwiit = require('../twiit/stockTwiit');
+var loadTwiit = require('../twiit/loadTwiit');
 
-<<<<<<< .merge_file_nrs31b
-var data = { title: "MiniTwr" };
-
-// Get home page
-router.get('/', function( req, res, next ) 
-{
-	// get stored twiits (in ../twiit/data) and send it to the client
-	loadTwiit(function( twiitArray ) 
-=======
 var data = {};
 data.title = "TWRRO";
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	loadTwiit(function(twiitArray) 
->>>>>>> .merge_file_cy20ld
 	{
 		data.twiits = twiitArray;
-		res.render( 'index', data );
+
+		console.log(data.twiits);
+		res.render('index', data);
 	});
-	data.twiitsLoaded = undefined;
+	data.response=undefined;
 });
 
-// Receive new twiit
-router.post( '/new_twiit', function( req, res, next ) 
-{
-	stockTwiit( req.body, function( error )
-	{		
-		// inform client if the twiit was succefully stored
-		data.twiitsLoaded = ( error )? false : true;
-		// emulate the GET request for home page
-		res.redirect('/');
-	}); 
+router.get('/success',function(req,res,next) {	//TEST SUCCESS SKIN PAGE
+	data.response ="Success";
+	data.image="/images/valide.png";
+	res.render('index', data);
+});
+
+router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
+	data.response ="Fail";
+	data.image="/images/refuse.jpg";
+	res.render('index', data);
+});
+
+/* POST NEW TWIIT PAGE */
+router.post('/new_twiit', function(req, res, next) {
+  stockTwiit(req.body, function(error)
+	{
+		if(error) {
+			data.response = "Fail";
+			data.image="/images/refuse.jpg";
+			res.redirect('/');
+		}
+		else {
+			data.response = "Success";
+			data.image="/images/valide.png";
+			res.redirect('/');
+		}
+	});
+ 
 });
 
 module.exports = router;
