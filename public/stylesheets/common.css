@@ -1,3 +1,14 @@
+.name{
+	font-weight:bold;
+}
+
+.date{
+	font-size:10px;
+}
+
+.message{
+	font-size:20px;
+}
 
 .name::after
 {
