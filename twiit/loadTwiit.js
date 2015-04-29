@@ -10,8 +10,8 @@ function TwiitStruct ( path )
 	// load data thanks to path and extract content
 	var data = fs.readFileSync( __dirname + "/data/" + path, "utf8" );
 	if ( data )
-	{		
-		this.date = new Date( parseInt( path.replace(/.txt/, "" )));
+	{
+		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
 		this.name = data.slice( data.indexOf( "<" ) + 1, data.indexOf( ">" ));
 		this.message = data.slice( data.indexOf( ">" ) + 1, data.length );
 	}		
