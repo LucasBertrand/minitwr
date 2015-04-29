@@ -13,7 +13,8 @@ a {
 
 .response {
 	padding-left:10px;
-	width: 400px;
+	margin-left:5px;
+	width:100%;
 	height: 30px;
 	border: 1px solid black;
 	position: relative;
@@ -29,7 +30,7 @@ a {
 
 .fail{
 	background-color: #FE3A3C;
-	background-image: url(../images/refuse.jpg);
+	background-image: url(../images/refuse.png);
 	background-repeat: no-repeat;
 	background-position: left;
 	}
@@ -95,4 +96,5 @@ textarea
 	padding: 5px;
 	box-sizing: border-box;
 	outline-color: #DF00EF;
+	resize:none;
 }

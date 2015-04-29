@@ -28,6 +28,7 @@ h1 {
 	border: 1px solid black;
 	position: relative;
 	border-radius: 5px;
+	max-width: 300px;
 }
 
 .success{
@@ -39,7 +40,7 @@ h1 {
 
 .fail{
 	background-color: #FE3A3C;
-	background-image: url(../images/refuse.jpg);
+	background-image: url(../images/refuse.png);
 	background-repeat: no-repeat;
 	background-position: left;
 	}
@@ -92,6 +93,7 @@ textarea
 	padding: 5px;
 	box-sizing: border-box;
 	outline-color: #DF00EF;
+	resize:none;
 }
 
 input[type="submit"]
