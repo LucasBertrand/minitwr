@@ -98,3 +98,11 @@ textarea
 	outline-color: #DF00EF;
 	resize:none;
 }
+
+.image_twiit{
+	border: solid red 2px;
+	display:inline;
+	margin: auto 50px auto auto;
+	display:inline;
+}
+

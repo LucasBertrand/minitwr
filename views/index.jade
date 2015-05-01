@@ -3,21 +3,23 @@ extends layout
 block content
 	section(class="left-side")
 		img(src="/images/logo_cigogne.png" class="logo")
-		h1 Bienvenue sur TWR!s
+		h1 Bienvenue sur TWR!
 		if response
 			if response == "Success"
 				p(class="response success")
 			else
 				p(class="response fail")
 	
-		form(action="/new_twiit",method="POST")
+		form(action="/new_twiit",enctype="multipart/form-data", method="POST")
 			input(type="text" name="user_name" placeholder="Votre Pseudo")
 			textarea(name="twiit", placeholder="Votre twiit")
+			input(type="file" name="image")
 			button(type="submit") Envoyer
 	
 	ul
 		each twiit in twiits
 			li(class="twiits")
 				p(class="name")=twiit.name
+				img(src=twiit.img class="image_twiit")
 				p(class="message")=twiit.message
 				p(class="date")=twiit.date
