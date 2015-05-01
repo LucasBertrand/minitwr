@@ -6,15 +6,31 @@ var fs = require( 'fs' );
  * 
  * @param callback {Function} the callback function
  */
-module.exports = function ( data, callback )
+module.exports = function ( body, files, callback )
 {
-	
+	console.log("==========>", files);
 	var path = __dirname+ "/data/" + Date.now()+ ".txt";
-	var content = "<" + data.user_name + ">" + data.twiit;
-	fs.writeFile( path, content, function( error )
-	{		
-		callback( error )
-	});
+	if (files) {
+		console.log("=========================>OUI TU ES RENTRE<=======================");
+		var content = "<" + body.user_name + ">" + body.twiit + "{/images/image_twiit/"+files.image.name + "}";
+		fs.writeFile( path, content, function( error ) {		
+		
+		
+			fs.readFile(files.image.path, function (err, data) {
+ 				var newPath = __dirname + files.image.path;
+  				fs.writeFile(newPath, data, function (error) {
+					callback( error );
+				});
+			});	
+		
+		});
+	} else {
+		var content = "<" + body.user_name + ">" + body.twiit + "{}";
+		fs.writeFile( path, content, function( error ) {	
+			callback( error );
+		});
+	}
+	
 	
 	
 };
