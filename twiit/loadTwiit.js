@@ -12,8 +12,8 @@ function TwiitStruct ( path )
 	if ( data )
 	{
 		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
-		this.name = data.slice( data.indexOf( "<" ) + 1, data.indexOf( ">" ));
-		this.message = data.slice( data.indexOf( ">" ) + 1, data.indexOf( "{" ) );
+		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
+		this.message = data.slice( data.indexOf( "]" ) + 1, data.indexOf( "{" ) );
 		this.img = data.slice( data.indexOf("{")+1,(data.length)-1);
 	}		
 }
