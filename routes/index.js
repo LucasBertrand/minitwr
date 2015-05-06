@@ -31,7 +31,32 @@ router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
 /* POST NEW TWIIT PAGE */
 router.post('/new_twiit', function(req, res, next)
 	{
-		if(req.body.extension=="jpg"||req.body.extension=="jpeg"||req.body.extension=="png"||req.body.extension=="bmp"||req.body.extension=="gif")
+		if(req.files.image)
+		{
+			if(req.files.image.extension=="jpg"||req.files.image.extension=="jpeg"||req.files.image.extension=="png"||req.files.image.extension=="bmp"||req.files.image.extension=="gif")
+			{
+				stockTwiit(req.body,req.files, function(error)
+				{
+					if(error)
+					{
+						console.log(error);
+						data.response = "Fail";
+						res.redirect('/');
+					}
+					else
+					{
+						data.response = "Success";
+						res.redirect('/');
+					}
+				});
+			}
+			else
+			{
+				data.response="Bad";
+				res.redirect('/');
+			}
+ 		}
+		else
 		{
 			stockTwiit(req.body,req.files, function(error)
 			{
@@ -48,12 +73,6 @@ router.post('/new_twiit', function(req, res, next)
 				}
 			});
 		}
-		else
-		{
-			data.response="Bad";
-			res.redirect('/');
-		}
- 
 });
 
 /*******************************************************************************************/

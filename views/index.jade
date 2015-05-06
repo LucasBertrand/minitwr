@@ -29,7 +29,8 @@ block content
 			li(class="twiits")
 				a(href="twiit_page?twiit="+twiit.filename)
 					p(class="name")=twiit.name
-				img(src=twiit.img class="image_twiit")
+				if twiit.img != ""
+					img(src=twiit.img class="image_twiit")
 				p(class="message")=twiit.message
 				p(class="date")=twiit.date
 	
