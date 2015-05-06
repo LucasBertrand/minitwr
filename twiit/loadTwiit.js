@@ -13,8 +13,9 @@ function TwiitStruct ( path )
 	{
 		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
 		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
-		this.message = data.slice( data.indexOf( "]" ) + 1, data.indexOf( "{" ) );
-		this.img = data.slice( data.indexOf("{")+1,(data.length)-1);
+		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
+		this.message = data.slice( data.indexOf( "}" ) + 1, data.length );
+		console.log("===================>",data.indexOf("{"));
 	}		
 }
 
@@ -34,8 +35,7 @@ module.exports = function ( callback )
 		{
 			for ( var i = 0; i < files.length; i++ )
 			{
-				result.push( new TwiitStruct( files[i] ));
-				console.log("========================>",result[i].img);				
+				result.push( new TwiitStruct( files[i] ));				
 			}
 		}
 		callback( result );

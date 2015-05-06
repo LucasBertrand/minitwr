@@ -10,7 +10,7 @@ module.exports = function ( body, files, callback )
 {
 	var path = __dirname+ "/data/" + Date.now()+ ".txt";
 	if (files.image) {
-		var content = "[" + body.user_name + "]" + body.twiit + "{/images/image_twiit/"+files.image.name + "}";
+		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit;
 		fs.writeFile( path, content, function( error )
 		{		
 			fs.readFile(files.image.path, function (err, data)
@@ -24,7 +24,7 @@ module.exports = function ( body, files, callback )
 		
 		});
 	} else {
-		var content = "[" + body.user_name + "]" + body.twiit + "{}";
+		var content = "[" + body.user_name + "]" + "{}" + body.twiit;
 		fs.writeFile( path, content, function( error ) {	
 			callback( error );
 		});
