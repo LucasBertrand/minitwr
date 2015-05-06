@@ -15,7 +15,7 @@ function TwiitStruct ( path )
 		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
 		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
 		this.message = data.slice( data.indexOf( "}" ) + 1, data.length );
-		console.log("===================>",data.indexOf("{"));
+		this.filename=path;
 	}		
 }
 
