@@ -2,15 +2,17 @@ var express = require('express');
 var router = express.Router();
 var stockTwiit = require('../twiit/stockTwiit');
 var loadTwiit = require('../twiit/loadTwiit');
+var twiit_page = require('../twiit/twiit_page');
 
 var data = {};
-data.title = "TWR";
+var twiit={};
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	loadTwiit(function(twiitArray) 
 	{
 		data.twiits = twiitArray.reverse();
-		
+		data.title = "TWR";
 		res.render('index', data);
 		data.response=undefined;
 	});
@@ -27,20 +29,37 @@ router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
 });
 
 /* POST NEW TWIIT PAGE */
-router.post('/new_twiit', function(req, res, next) {
-  stockTwiit(req.body,req.files, function(error)
+router.post('/new_twiit', function(req, res, next)
 	{
-		if(error) {
-			console.log(error);
-			data.response = "Fail";
-			res.redirect('/');
-		}
-		else {
-			data.response = "Success";
-			res.redirect('/');
-		}
+		stockTwiit(req.body,req.files, function(error)
+		{
+			if(error)
+			{
+				console.log(error);
+				data.response = "Fail";
+				res.redirect('/');
+			}
+			else
+			{
+				data.response = "Success";
+				res.redirect('/');
+			}
 	});
  
+});
+
+/*******************************************************************************************/
+
+
+router.get('/twiit_page', function(req, res, next)
+{
+	
+	var url=req.query.twiit;
+	twiit_page(url,function(file)
+	{
+		file.title="Twiit de "+file.name
+		res.render('twiit_page',file);
+	});
 });
 
 module.exports = router;
