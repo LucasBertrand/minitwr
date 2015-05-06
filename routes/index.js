@@ -31,20 +31,28 @@ router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
 /* POST NEW TWIIT PAGE */
 router.post('/new_twiit', function(req, res, next)
 	{
-		stockTwiit(req.body,req.files, function(error)
+		if(req.body.extension=="jpg"||req.body.extension=="jpeg"||req.body.extension=="png"||req.body.extension=="bmp"||req.body.extension=="gif")
 		{
-			if(error)
+			stockTwiit(req.body,req.files, function(error)
 			{
-				console.log(error);
-				data.response = "Fail";
-				res.redirect('/');
-			}
-			else
-			{
-				data.response = "Success";
-				res.redirect('/');
-			}
-	});
+				if(error)
+				{
+					console.log(error);
+					data.response = "Fail";
+					res.redirect('/');
+				}
+				else
+				{
+					data.response = "Success";
+					res.redirect('/');
+				}
+			});
+		}
+		else
+		{
+			data.response="Bad";
+			res.redirect('/');
+		}
  
 });
 

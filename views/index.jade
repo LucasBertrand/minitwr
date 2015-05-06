@@ -13,8 +13,10 @@ block content
 			if response
 				if response == "Success"
 					p(class="response success")
-				else
+				else if response == "Fail"
 					p(class="response fail")
+				else
+					p(class="response bad")
 	
 			form(action="/new_twiit",enctype="multipart/form-data", method="POST")
 				input(type="text" name="user_name" placeholder="Votre Pseudo")

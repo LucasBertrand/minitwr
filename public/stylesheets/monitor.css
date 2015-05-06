@@ -49,6 +49,13 @@ section {
 	background-position: left;
 	}
 
+.bad{
+	background-color: #FE3A3C;
+	background-image: url(../images/refuse.png);
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+
 .success::before {
 	display: block;
 	margin-left: 35px;
@@ -61,6 +68,12 @@ section {
 	margin-left: 35px;
 	margin-top: 7px;
 	content: "Ah bah c'est pas bon";
+}
+.bad::before{
+	display: block;
+	margin-left: 35px;
+	margin-top: 7px;
+	content: "Type de fichier non pris en charge";
 }
 
 input[type="text"]

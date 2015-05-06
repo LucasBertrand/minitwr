@@ -10,6 +10,7 @@ module.exports = function ( body, files, callback )
 {
 	var path = __dirname+ "/data/" + Date.now()+ ".txt";
 	if (files.image) {
+		
 		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit;
 		fs.writeFile( path, content, function( error )
 		{		
