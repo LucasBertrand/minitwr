@@ -25,9 +25,10 @@ block content
 	ul
 		each twiit in twiits
 			li(class="twiits")
-				p(class="name")=twiit.name
+				a(href="twiit_page?twiit="+twiit.filename)
+					p(class="name")=twiit.name
 				img(src=twiit.img class="image_twiit")
 				p(class="message")=twiit.message
 				p(class="date")=twiit.date
-
+	
 	script(type='text/javascript' src='/javascripts/index.js')
