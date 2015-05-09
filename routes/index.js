@@ -18,6 +18,8 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+/**************************************************************************************/
+
 router.get('/success',function(req,res,next) {	//TEST SUCCESS SKIN PAGE
 	data.response ="Success";
 	res.render('index', data);
@@ -30,11 +32,16 @@ router.get('/fail',function(req,res,next) {	//TEST FAIL SKIN PAGE
 
 /* POST NEW TWIIT PAGE */
 router.post('/new_twiit', function(req, res, next)
+{
+	if(req.body.user_name!=undefined)	//test if user_name is present
 	{
-		if(req.files.image)
+		console.log("===========================>name correct");
+		if(req.files.image)		//test if image is present
 		{
-			if(req.files.image.extension=="jpg"||req.files.image.extension=="jpeg"||req.files.image.extension=="png"||req.files.image.extension=="bmp"||req.files.image.extension=="gif")
+			console.log("===========================>req.files.image");	
+			if(req.files.image.extension=="png")	//test if image extension is png
 			{
+				console.log("===========================>req.files.image.extension");
 				stockTwiit(req.body,req.files, function(error)
 				{
 					if(error)
@@ -50,14 +57,16 @@ router.post('/new_twiit', function(req, res, next)
 					}
 				});
 			}
-			else
+			else		//Image extension is not png
 			{
+				console.log("===========================>req.files.image non");
 				data.response="Bad";
 				res.redirect('/');
 			}
- 		}
-		else
+		}
+		else		//image is not present
 		{
+			console.log("===========================>req.files non");
 			stockTwiit(req.body,req.files, function(error)
 			{
 				if(error)
@@ -73,7 +82,14 @@ router.post('/new_twiit', function(req, res, next)
 				}
 			});
 		}
+	}
+	else		//no user_name
+	{
+		data.response="no_user";
+		res.redirect('/');
+	}
 });
+
 
 /*******************************************************************************************/
 
