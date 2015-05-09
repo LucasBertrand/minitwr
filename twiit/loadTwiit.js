@@ -35,7 +35,11 @@ module.exports = function ( callback )
 		{
 			for ( var i = 0; i < files.length; i++ )
 			{
-				result.push( new TwiitStruct( files[i] ));				
+				result.push( new TwiitStruct( files[i] ));
+				if(result[i].message=="undefined")
+				{
+					result[i].message="";
+				}				
 			}
 		}
 		callback( result );

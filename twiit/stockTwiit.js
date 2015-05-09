@@ -8,8 +8,10 @@ var fs = require( 'fs' );
  */
 module.exports = function ( body, files, callback )
 {
+	console.log("+++++++++++++++++++++++++++++++++++++++OUI CA ENREGISTRE");
 	var path = __dirname+ "/data/" + Date.now()+ ".txt";
-	if (files.image) {
+	if (files.image) 
+	{
 		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit;
 		fs.writeFile( path, content, function( error )
 		{		
@@ -20,16 +22,14 @@ module.exports = function ( body, files, callback )
 				{
 					callback( error );
 				});
-			});	
-		
+			});
 		});
-	} else {
+	}
+	else 
+	{
 		var content = "[" + body.user_name + "]" + "{}" + body.twiit;
 		fs.writeFile( path, content, function( error ) {	
 			callback( error );
 		});
 	}
-	
-	
-	
 };
