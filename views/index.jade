@@ -1,11 +1,12 @@
 extends layout
 
 block content
-	script(src="/socket.io-client/socket.io.js")
-		
-		script.
-			var socket = io.connect();
-			console.log(socket);
+	script(src="/socket.io/socket.io.js")
+	
+	script.
+		var socket = io.connect();
+		console.log(socket);
+		socket.on('message',function(message){console.log(message)});
 	section(class="left-side")
 		div(id="formulaire")
 			img(src="/images/logo_cigogne.png" class="logo")
@@ -15,14 +16,17 @@ block content
 					p(class="response success")
 				else if response == "Fail"
 					p(class="response fail")
-				else
+				else if response== "Bad"
 					p(class="response bad")
+				else if response=="no_user"
+					p(class="response no_user")
 	
 			form(action="/new_twiit",enctype="multipart/form-data", method="POST")
 				input(type="text" name="user_name" placeholder="Votre Pseudo")
 				textarea(name="twiit", placeholder="Votre twiit")
 				input(type="file" name="image")
-				button(type="submit") Envoyer
+				button(type="submit" class="boutton_send")
+					img(src="/images/twiit.png" class="image_send")
 	
 	ul
 		each twiit in twiits
