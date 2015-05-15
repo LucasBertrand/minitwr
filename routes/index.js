@@ -3,6 +3,7 @@ var router = express.Router();
 var stockTwiit = require('../twiit/stockTwiit');
 var loadTwiit = require('../twiit/loadTwiit');
 var twiit_page = require('../twiit/twiit_page');
+var stockcomment = require('../twiit/stockcomment');
 
 var data = {};
 var twiit={};
@@ -39,7 +40,7 @@ router.post('/new_twiit', function(req, res, next)
 		if(req.files.image)		//test if image is present
 		{
 			console.log("===========================>req.files.image");	
-			if(req.files.image.extension=="png")	//test if image extension is png
+			if(req.files.image.extension=="png"||req.files.image.extension=="bmp"||req.files.image.extension=="gif"||req.files.image.extension=="jpeg"||req.files.image.extension=="jpg")	//test if image extension is png, jpeg,jpg,bmp,gif
 			{
 				console.log("===========================>req.files.image.extension");
 				stockTwiit(req.body,req.files, function(error)
@@ -101,7 +102,24 @@ router.get('/twiit_page', function(req, res, next)
 	twiit_page(url,function(file)
 	{
 		file.title="Twiit de "+file.name
+		file.twiit=url;
 		res.render('twiit_page',file);
+	});
+});
+
+router.post('/stock_comment',function(req,res,next)
+{
+console.log("========================++>",req.body.twiit);
+	stockcomment(req.body.commentaire,req.body.twiit,req.body.user,function(error)
+	{
+		if(error)
+		{
+			console.log(error);
+		}
+		else
+		{
+			res.redirect('/twiit_page?twiit='+req.body.twiit);
+		}
 	});
 });
 

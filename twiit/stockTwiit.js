@@ -8,11 +8,13 @@ var fs = require( 'fs' );
  */
 module.exports = function ( body, files, callback )
 {
+	var date=Date.now();
 	console.log("+++++++++++++++++++++++++++++++++++++++OUI CA ENREGISTRE");
-	var path = __dirname+ "/data/" + Date.now()+ ".txt";
+	console.log("====================================>",io);
+	var path = __dirname+ "/data/" + date+ ".txt";
 	if (files.image) 
 	{
-		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit;
+		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit + "BOC";
 		fs.writeFile( path, content, function( error )
 		{		
 			fs.readFile(files.image.path, function (err, data)
@@ -20,6 +22,12 @@ module.exports = function ( body, files, callback )
  				var newPath =files.image.path;
   				fs.writeFile(newPath, data, function (error)
 				{
+					var twiit={};
+					twiit.date = date;
+					twiit.name = body.user_name;
+					twiit.img =  "/images/image_twiit/"+files.image.name;
+					twiit.message = body.twiit;
+					twiit.filename=path;
 					callback( error );
 				});
 			});
@@ -27,7 +35,7 @@ module.exports = function ( body, files, callback )
 	}
 	else 
 	{
-		var content = "[" + body.user_name + "]" + "{}" + body.twiit;
+		var content = "[" + body.user_name + "]" + "{}" + body.twiit+"BOC";
 		fs.writeFile( path, content, function( error ) {	
 			callback( error );
 		});

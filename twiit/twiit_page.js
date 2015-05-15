@@ -14,7 +14,9 @@ function TwiitStruct ( path )
 		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
 		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
 		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
-		this.message = data.slice( data.indexOf( "}" ) + 1, data.length );
+		this.message = data.slice( data.indexOf( "}" ) + 1, data.indexOf("BOC") );
+		var comm=data.slice(data.indexOf("BOC")+3,data.length-1);
+		this.comments=comm.split("|");
 	}	
 }
 
@@ -26,5 +28,6 @@ function TwiitStruct ( path )
 module.exports = function (url, callback )
 {
 	var file=new TwiitStruct(url);
+	console.log("=========================>",file.comments);
 	callback(file);
 };

@@ -7,6 +7,7 @@ block content
 		var socket = io.connect();
 		console.log(socket);
 		socket.on('message',function(message){console.log(message)});
+		socket.on('twiit',function(twiit){console.log(twiit)});
 	section(class="left-side")
 		div(id="formulaire")
 			img(src="/images/logo_cigogne.png" class="logo")
@@ -34,7 +35,8 @@ block content
 				a(href="twiit_page?twiit="+twiit.filename)
 					p(class="name")=twiit.name
 				if twiit.img != ""
-					img(src=twiit.img class="image_twiit")
+					a(href=twiit.img)
+						img(src=twiit.img class="image_twiit")
 				p(class="message")=twiit.message
 				p(class="date")=twiit.date
 	
