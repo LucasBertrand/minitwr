@@ -21,6 +21,8 @@ block content
 					p(class="response bad")
 				else if response=="no_user"
 					p(class="response no_user")
+				else if response=="nothing"
+					p(class="response nothing")
 	
 			form(action="/new_twiit",enctype="multipart/form-data", method="POST")
 				input(type="text" name="user_name" placeholder="Votre Pseudo")

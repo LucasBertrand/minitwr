@@ -52,26 +52,13 @@ section {
 	background-position: left;
 	}
 
-.fail{
+.fail, .bad, .no_user, .nothing{
 	background-color: #FE3A3C;
 	background-image: url(../images/refuse.png);
 	background-repeat: no-repeat;
 	background-position: left;
 	}
 
-.bad{
-	background-color: #FE3A3C;
-	background-image: url(../images/refuse.png);
-	background-repeat: no-repeat;
-	background-position: left;
-	}
-
-.no_user{
-	background-color: #FE3A3C;
-	background-image: url(../images/refuse.png);
-	background-repeat: no-repeat;
-	background-position: left;
-	}
 
 .success::before {
 	display: block;
@@ -98,6 +85,14 @@ section {
 	margin-left: 35px;
 	margin-top: 7px;
 	content: "Pseudonyme non valide ou non présent";
+}
+
+.nothing::before
+{
+	display: block;
+	margin-left: 35px;
+	margin-top: 7px;
+	content: "Twiit et image non present";
 }
 
 input[type="text"]

@@ -58,7 +58,7 @@ router.post('/new_twiit', function(req, res, next)
 					}
 				});
 			}
-			else		//Image extension is not png
+			else		//Image extension is not png, jpeg, jpg, gif, bmp
 			{
 				console.log("===========================>req.files.image non");
 				data.response="Bad";
@@ -67,21 +67,29 @@ router.post('/new_twiit', function(req, res, next)
 		}
 		else		//image is not present
 		{
-			console.log("===========================>req.files non");
-			stockTwiit(req.body,req.files, function(error)
+			if(req.body.twiit==undefined)	//test if image and twiit are not present
 			{
-				if(error)
+				data.response = "nothing";
+				res.redirect('/');
+			}
+			else			//image is not present but twiit is present
+			{
+				console.log("===========================>req.files non");
+				stockTwiit(req.body,req.files, function(error)
 				{
-					console.log(error);
-					data.response = "Fail";
-					res.redirect('/');
-				}
-				else
-				{
-					data.response = "Success";
-					res.redirect('/');
-				}
-			});
+					if(error)
+					{
+						console.log(error);
+						data.response = "Fail";
+						res.redirect('/');
+					}
+					else
+					{
+						data.response = "Success";
+						res.redirect('/');
+					}
+				});
+			}
 		}
 	}
 	else		//no user_name
