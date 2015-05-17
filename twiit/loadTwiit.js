@@ -24,7 +24,7 @@ function TwiitStruct ( path )
  * 
  * @param callback {Function} the callback function
  */
-module.exports = function ( callback )
+module.exports = function ( page ,callback )
 {
 
 	var result = []; 
@@ -33,16 +33,24 @@ module.exports = function ( callback )
 		if ( error ) throw error;
 		if ( files )
 		{
-			for ( var i = 0; i < files.length; i++ )
+			files=files.reverse();
+			var i = page*10;
+			if((page+1)*10<files.length)
+			{
+				var limite=(page+1)*10;
+			}
+			else
+			{
+				var limite=files.length
+			}
+			for ( i; i < limite; i++ )
 			{
 				result.push( new TwiitStruct( files[i] ));
-				if(result[i].message=="undefined")
-				{
-					result[i].message="";
-				}				
 			}
+			var page_maximum=files.length;
+			
 		}
-		callback( result );
+		callback(page_maximum,result );
 	});	
 	
 };

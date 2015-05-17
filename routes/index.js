@@ -10,10 +10,23 @@ var twiit={};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	loadTwiit(function(twiitArray) 
+	if(req.query.page!=undefined)
 	{
-		data.twiits = twiitArray.reverse();
+		var page = req.query.page;
+	}
+	else
+	{
+		var page=0;
+	}
+	loadTwiit(page,function(page_maximum,twiitArray) 
+	{
+		data.twiits = twiitArray;
 		data.title = "TWR";
+		data.suivant="/?page="+(parseInt(page)+parseInt('1'));
+		data.precedent="/?page="+(page-1);
+		data.page=page;
+		var maximum=page_maximum/10;
+		data.maximum=Math.floor(maximum);
 		res.render('index', data);
 		data.response=undefined;
 	});
@@ -111,6 +124,7 @@ router.get('/twiit_page', function(req, res, next)
 	{
 		file.title="Twiit de "+file.name
 		file.twiit=url;
+		file.page="/?page="+req.query.page;
 		res.render('twiit_page',file);
 	});
 });
