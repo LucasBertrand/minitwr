@@ -64,7 +64,7 @@ li
 	
 }
 
-.twiit
+.hide
 {
 	visibility:hidden;
 	display:none;
@@ -74,5 +74,10 @@ input[type="submit"]
 {
 	display:block;
 	position:center;
+}
+
+form
+{
+	margin:50px;
 }
 

@@ -124,7 +124,7 @@ router.get('/twiit_page', function(req, res, next)
 	{
 		file.title="Twiit de "+file.name
 		file.twiit=url;
-		file.page="/?page="+req.query.page;
+		file.page=req.query.page;
 		res.render('twiit_page',file);
 	});
 });
@@ -140,7 +140,7 @@ console.log("========================++>",req.body.twiit);
 		}
 		else
 		{
-			res.redirect('/twiit_page?twiit='+req.body.twiit);
+			res.redirect('/twiit_page?twiit='+req.body.twiit+"&page="+req.body.page);
 		}
 	});
 });

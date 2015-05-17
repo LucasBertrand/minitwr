@@ -10,7 +10,8 @@ block content
 		socket.on('twiit',function(twiit){console.log(twiit)});
 	section(class="left-side")
 		div(id="formulaire")
-			img(src="/images/logo_cigogne.png" class="logo")
+			a(href="/?page=0")
+				img(src="/images/logo_cigogne.png" class="logo")
 			h1 Bienvenue sur TWR!
 			if response
 				if response == "Success"
