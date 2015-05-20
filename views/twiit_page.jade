@@ -11,6 +11,8 @@ html
 				img(src="/images/logo_cigogne.png" class="logo")
 		a(href="/?page="+page) Retour page #{page}
 		p(class="date")=date
+		a(href="/search?user=#{name}") #{name}
+		p a twiiter:
 		a(href=img)
 			img(src=img class="image_twiit")
 		p(class="message")=message
