@@ -1,13 +1,24 @@
-.image_twiit
+.logo-link {
+	margin: auto;
+	margin-top: 60px;
+	display: block;
+	width: 202px;
+	height: 198px;
+	background-image: url("../images/logo_cigogne.png");
+}
+
+.link-img
 {
+	display: block;
 	max-width:90%;
 	margin: 20px auto 20px auto;
 }
 .message
 {
+
 	margin: auto;
 	box-sizing: border-box;
-	border: 4px solid #96BDFF;
+	border: 1px solid #ffffff;
 	min-width: 300px;
 	padding: 10px;
 	width: 600px;
@@ -19,8 +30,11 @@
 	-webkit-box-shadow: 0px 1px 2px 0px #656565;
 	-o-box-shadow: 0px 1px 2px 0px #656565;
 	box-shadow: 0px 1px 2px 0px #656565;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=2);
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+	text-align: left;
 }
 
 .comment-list {

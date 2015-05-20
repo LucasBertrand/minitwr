@@ -13,8 +13,7 @@ html
 
 	body
 
-		a(href="/?page=0")
-			img(src="/images/logo_cigogne.png" class="logo")
+		a(href="/?page=0" class="logo-link")
 
 		br
 
@@ -22,16 +21,16 @@ html
 
 		p(class="date")=date
 
-		h2 !{name} a twiité :
+		h2 !{name}'s twiit :
 
-		a(href=img)
-			img(src=img class="image_twiit")
+		a(href=img class="link-img")
+			img(src=img)
 
 		p(class="message")=message
 
 		br
 
-		h2 Commentaires :
+		h2 Comment(s) :
 
 		ul(class="comment-list")
 			each comment in comments
@@ -46,6 +45,5 @@ html
 		
 		div(class="ws" id="connected-users")
 		div(id="oModal" class="cModal")
-			h2(id="popupName")
+
 			a(id="goToTwiit") See the twiit
-			img(src="images/close-icon.png" id="close")

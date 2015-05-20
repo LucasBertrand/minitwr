@@ -91,7 +91,6 @@ router.get("/twiit_page", function(req, res, next)
 {
 	var url = req.query.twiit;
 	twiit_page(url, function(file){
-		console.log("URL =====>", file);
 		file.title = "Twiit de " + file.name;
 		file.twiit = url;
 		file.page = req.query.page;

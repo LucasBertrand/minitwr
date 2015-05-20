@@ -6,17 +6,16 @@ function updateUsersCount (connections) {
 function showPopup(content) {
 	var modal = document.getElementById("oModal");
 	if (!modal.style.opacity) {
-		document.getElementById("popupName").innerHTML = content.name + " has twiited !!!";
-		document.getElementById("goToTwiit").setAttribute("href", content.url);
+		var link = document.getElementById("goToTwiit");
+		link.setAttribute("href", content.url);
+		link.innerHTML = content.name + " has twiited !!!";
 
-		var	modalWidth = modal.offsetWidth,
-			modalHeight = modal.offsetHeight,
-			width = window.innerWidth,
-			height = window.innerHeight;
-
-		modal.style.left = width/2 - modalWidth/2 + "px";
-		modal.style.top = height/2 - modalHeight/2 + "px";
 		modal.style.opacity = 1;
+		modal.style.top = 0;
+		setTimeout(function() {
+			modal.style.top = -35 + "px";
+			modal.style.opacity = null;
+		}, 5000)
 	}
 }
 
@@ -32,13 +31,10 @@ window.onscroll = function(event) {
 };
 
 window.onload = function() {
-	document.getElementById("close").onclick = function(e) {
-		document.getElementById("oModal").style.opacity = 0;
-	};
+
 	var twiitForm = document.getElementById("postTwiit");
 	if (twiitForm) {
 		twiitForm.onsubmit = function(e) {
-			console.log("okok")
 			var name = document.getElementById("userName").value;
 			var twiit = document.getElementById("twiit").value;
 			var date = Date.now();
