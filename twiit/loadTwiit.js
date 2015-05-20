@@ -13,7 +13,7 @@ module.exports = function(page, callback)
 		limit,
 		maxPage,
 		result = [],
-		twiitsPerPage = 5;
+		twiitsPerPage = 10;
 
 	fs.readdir( __dirname + "/data/", function( err, twiits )
 	{

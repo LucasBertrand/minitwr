@@ -4,6 +4,7 @@ var stockTwiit = require("../twiit/stockTwiit");
 var loadTwiit = require("../twiit/loadTwiit");
 var twiit_page = require("../twiit/twiit_page");
 var stockcomment = require("../twiit/stockcomment");
+var search_twiit=require("../twiit/search_twiit.js");
 
 /* Load the stored twiits and joint with it a status response
  *
@@ -108,6 +109,30 @@ router.post("/stock_comment", function(req, res, next)
 		res.redirect("twiit_page?twiit=" + req.body.twiit + "&page=" + req.body.page);
 	}
 
+});
+
+router.get('/search',function(req,res,next)
+{
+	search_twiit(req.query.user,function(result)
+	{
+		var data={};
+		data.result=result;
+		data.title=req.query.user;
+		data.taille=result.length;
+		res.render('search_page',data);
+	});
+});
+
+router.post('/search_POST',function(req,res,next)
+{
+	search_twiit(req.body.user,function(result)
+	{
+		var data={};
+		data.result=result;
+		data.title=req.body.user;
+		data.taille=result.length;
+		res.render('search_page',data);
+	});
 });
 
 module.exports = router;

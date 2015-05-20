@@ -4,7 +4,7 @@ html
 
 	head
 
-		title #{title}   
+		title Page de #{title}   
 		link(href="/images/favicon.png", rel="shortcut icon")
 		link(rel='stylesheet' href='./stylesheets/styles.css')
 		link(rel='stylesheet' href='./stylesheets/styles_twiitPage.css')
@@ -13,37 +13,41 @@ html
 
 	body
 
-		a(href="/?page=0" class="logo-link")
+		a(href="/?page=0")
+			img(src="/images/logo_cigogne.png" class="logo")
 
 		br
 
-		a(href="/?page="+page) Retour
+		a(href="/?page="+page ) Retour
 
 		p(class="date")=date
 
-		h2 !{name}'s twiit :
+		p
+			a(href="/search?user=#{name}") #{name}
+			|  a twiiter:
 
-		a(href=img class="link-img")
-			img(src=img)
+		a(href=img)
+			img(src=img class="image_twiit")
 
 		p(class="message")=message
 
 		br
 
-		h2 Comment(s) :
+		h2 Commentaires :
 
 		ul(class="comment-list")
 			each comment in comments
 				li=comment
 
 		form(action='/stock_comment', method="POST" class="form-comment")
-			input(type="text" placeholder="Your nickname (Optionnal)" name="user" class="input-comment")
-			input(type="text" name="commentaire" placeholder="Your comment" class="input-comment")
+			input(type="text" placeholder="Your nickname (Optionnal)" name="user" class="input-username")
+			textarea( name="commentaire" placeholder="Your comment" class="input-comment")
 			input(type="hidden" value=twiit name="twiit" readonly)
 			input(type="hidden" value=page name="page"  readonly)
 			button(type="submit") Send
 		
 		div(class="ws" id="connected-users")
 		div(id="oModal" class="cModal")
-
+			h2(id="popupName")
 			a(id="goToTwiit") See the twiit
+			img(src="images/close-icon.png" id="close")

@@ -11,6 +11,9 @@ html
 		script(src="./javascripts/index.js")
 
 	body
+		form(action="/search_POST" method="POST")
+					input(type="text" placeholder="Utilisateur recherché" name="user")
+					button(type="submit") Rechercher
 
 
 		div(class="warp")
@@ -35,19 +38,32 @@ html
 			ul(class="twiit-list")
 
 				each twiit in twiits
-					a(href="twiit_page?twiit=" + twiit.filename + "&page=" + page class="twiit-link")
-						li(class="twiits")
 
-							span(class="name") !{twiit.name}'s twiit :
-							br
-							br
-							span(class="elapsed-time")= twiit.elapsed
+					li(class="twiits")
+						-	function insertTimeElapsed (t0, t1) {
+						-		var timeElapsed = t1 - t0;
+						-		var seconds = Math.floor(timeElapsed / 1000);
+						-		var minutes = Math.floor(seconds / 60);
+						-		var hours = Math.floor(minutes / 60);
+						-		var result;
+						-		if (!minutes) {
+						-			result = Math.floor(seconds) + " second(s) ago";
+						-		} else if (!hours) {
+						-		result = Math.floor(minutes) + " minute(s) ago";
+						-		} else {
+						-		result = Math.floor(hours) + " hour(s) ago";
+						-		}
+						-		return result;
+						-	}
+						a(href="twiit_page?twiit=" + twiit.filename + "&page=" + page class="name") !{twiit.name}'s twiit :
+						span(class="elapsed-time") #{insertTimeElapsed(JSON.parse(twiit.date), Date.now())}
 
-							if twiit.img != ""
+						if twiit.img != ""
+							a(href="twiit_page?twiit=" + twiit.filename + "&page=" + page)
 								img(src=twiit.img class="image_twiit")
 
-							p(class="message")=twiit.message
-							p(class="date")= new Date(twiit.date).toLocaleString()
+						p(class="message")=twiit.message
+						p(class="date")= new Date(twiit.date).toLocaleString()
 
 				div(class="pagination")
 
@@ -60,8 +76,8 @@ html
 					if(page < maximum)
 						a(href=suivant class="next")
 
-		div(class="info-panels")
-			div(class="ws" id="connected-users")
-			div(id="oModal" class="cModal")
-				span(id="popupName")
-				a(id="goToTwiit") See the twiit
+		div(class="ws" id="connected-users")
+		div(id="oModal" class="cModal")
+			h2(id="popupName")
+			a(id="goToTwiit") See the twiit
+			img(src="images/close-icon.png" id="close")

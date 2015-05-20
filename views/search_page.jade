@@ -1,0 +1,25 @@
+doctype html
+html
+	head
+		title Page de #{title}   
+		link(href="/images/favicon.png", rel="shortcut icon")
+		link(rel='stylesheet' href='./stylesheets/styles.css')
+		link(rel='stylesheet' media='screen and (min-width: 720px)' href='./stylesheets/styles_searchPage.css')
+	body
+		a(href="/?page=0")
+				img(src="/images/logo_cigogne.png" class="logo")
+		if(taille==0)
+			h1 L'utilisateur n'existe pas
+		else
+			h2 Liste des twiits de #{title} :
+			ul
+				each twiit in result
+					li(class="twiits")
+						a(href="twiit_page?twiit="+twiit.filename+"&page="+page)
+							p(class="name")=twiit.name
+						if twiit.img != ""
+							a(href=twiit.img)
+								img(src=twiit.img class="image_twiit")
+						p(class="message")=twiit.message
+						p(class="date")=twiit.date
+		
