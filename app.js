@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var app = express();
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
 var multer  = require('multer');
 
 // view engine setup
@@ -55,12 +54,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// manager socket.io events
-io.on('connection', function(socket) {
-	console.log('=============================>User connected');
-	socket.emit('message',"Bienvenu");
-});
 
-server.listen(8080);
 
 module.exports = app;

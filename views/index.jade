@@ -1,49 +1,83 @@
-extends layout
+doctype html
 
-block content
-	script(src="/socket.io/socket.io.js")
-	
-	script.
-		var socket = io.connect();
-		console.log(socket);
-		socket.on('message',function(message){console.log(message)});
-		socket.on('twiit',function(twiit){console.log(twiit)});
-	section(class="left-side")
-		div(id="formulaire")
-			a(href="/?page=0")
-				img(src="/images/logo_cigogne.png" class="logo")
-			h1 Bienvenue sur TWR!
-			if response
-				if response == "Success"
-					p(class="response success")
-				else if response == "Fail"
-					p(class="response fail")
-				else if response== "Bad"
-					p(class="response bad")
-				else if response=="no_user"
-					p(class="response no_user")
-				else if response=="nothing"
-					p(class="response nothing")
-	
-			form(action="/new_twiit",enctype="multipart/form-data", method="POST")
-				input(type="text" name="user_name" placeholder="Votre Pseudo")
-				textarea(name="twiit", placeholder="Votre twiit")
-				input(type="file" name="image")
-				button(type="submit" class="boutton_send")
-					img(src="/images/twiit.png" class="image_send")
-		if(page!=0)
-			a(href=precedent) Précedent
-		if(page<maximum)
-			a(href=suivant) Suivant
-	ul
-		each twiit in twiits
-			li(class="twiits")
-				a(href="twiit_page?twiit="+twiit.filename+"&page="+page)
-					p(class="name")=twiit.name
-				if twiit.img != ""
-					a(href=twiit.img)
-						img(src=twiit.img class="image_twiit")
-				p(class="message")=twiit.message
-				p(class="date")=twiit.date
-	
-	script(type='text/javascript' src='/javascripts/index.js')
+html
+
+	head
+
+		title #{title}
+		link(href="/images/favicon.png", rel="shortcut icon")
+		link(rel='stylesheet' href='./stylesheets/styles.css')
+		script(src="socket.io/socket.io.js")
+		script(src="./javascripts/index.js")
+
+	body
+		form(action="/search_POST" method="POST")
+					input(type="text" placeholder="Utilisateur recherché" name="user")
+					button(type="submit") Rechercher
+
+
+		div(class="warp")
+
+			section(class="left-side")
+
+				div(id="formulaire")
+
+					a(href="/?page=0")
+						img(src="/images/logo_cigogne.png" class="logo")
+
+					if response
+						p(class="response #{response.success}")= response.message
+
+					form(action="/new_twiit",enctype="multipart/form-data", method="POST" id="postTwiit")
+						input(type="text" name="user_name" placeholder="Your Nickname" class="input-name" id="userName")
+						textarea(name="twiit", placeholder="Your Twiiiiiit !" id="twiit")
+						input(type="file" name="image")
+						input(type="hidden" name="date" id="dateTwiit")
+						button(type="submit" class="boutton_send") Twiit !
+
+			ul(class="twiit-list")
+
+				each twiit in twiits
+
+					li(class="twiits")
+						-	function insertTimeElapsed (t0, t1) {
+						-		var timeElapsed = t1 - t0;
+						-		var seconds = Math.floor(timeElapsed / 1000);
+						-		var minutes = Math.floor(seconds / 60);
+						-		var hours = Math.floor(minutes / 60);
+						-		var result;
+						-		if (!minutes) {
+						-			result = Math.floor(seconds) + " second(s) ago";
+						-		} else if (!hours) {
+						-		result = Math.floor(minutes) + " minute(s) ago";
+						-		} else {
+						-		result = Math.floor(hours) + " hour(s) ago";
+						-		}
+						-		return result;
+						-	}
+						a(href="twiit_page?twiit=" + twiit.filename + "&page=" + page class="name") !{twiit.name}'s twiit :
+						span(class="elapsed-time") #{insertTimeElapsed(JSON.parse(twiit.date), Date.now())}
+
+						if twiit.img != ""
+							a(href="twiit_page?twiit=" + twiit.filename + "&page=" + page)
+								img(src=twiit.img class="image_twiit")
+
+						p(class="message")=twiit.message
+						p(class="date")= new Date(twiit.date).toLocaleString()
+
+				div(class="pagination")
+
+					if(page != 0)
+						a(href=precedent class="prev")
+
+					span(class="nbPage")
+					script.
+						console.log(!{page}, !{maximum}, !{twiits.length})
+					if(page < maximum)
+						a(href=suivant class="next")
+
+		div(class="ws" id="connected-users")
+		div(id="oModal" class="cModal")
+			h2(id="popupName")
+			a(id="goToTwiit") See the twiit
+			img(src="images/close-icon.png" id="close")

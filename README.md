@@ -1,3 +1,3 @@
 #Minitwr
 
-2015
+Student project - 2015

@@ -15,8 +15,8 @@ function TwiitStruct ( path )
 		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
 		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
 		this.message = data.slice( data.indexOf( "}" ) + 1, data.indexOf("BOC") );
-		var comm=data.slice(data.indexOf("BOC")+3,data.length-1);
-		this.comments=comm.split("|");
+		this.comments = data.slice(data.indexOf("BOC") + 3, data.length - 1).split("|");
+		this.comments.pop();
 	}	
 }
 
@@ -27,7 +27,6 @@ function TwiitStruct ( path )
  */
 module.exports = function (url, callback )
 {
-	var file=new TwiitStruct(url);
-	console.log("=========================>",file.comments);
+	var file = new TwiitStruct(url);
 	callback(file);
 };

@@ -11,46 +11,40 @@ function TwiitStruct ( path )
 	var data = fs.readFileSync( __dirname + "/data/" + path, "utf8" );
 	if ( data )
 	{
-		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
+		this.date = parseInt( path.replace(/.txt/, "" ));
 		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
 		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
 		this.message = data.slice( data.indexOf( "}" ) + 1, data.indexOf( "BOC" ));
-		this.filename=path;
+		this.filename = path;
 	}		
 }
 
 /* Read ./twiit/data content, make a structure data from .txt files
  * and return an array of stored twiits 
- * 
+ *
+ * @param page {Number} the current page of the client
  * @param callback {Function} the callback function
  */
-module.exports = function ( page ,callback )
+module.exports = function(page, callback)
 {
+	var i,
+		limit,
+		maxPage,
+		result = [],
+		twiitsPerPage = 10;
 
-	var result = []; 
-	fs.readdir( __dirname + "/data/", function( error, files )
+	fs.readdir( __dirname + "/data/", function( err, twiits )
 	{
-		if ( error ) throw error;
-		if ( files )
+		if ( err ) throw err;
+		if ( twiits )
 		{
-			files=files.reverse();
-			var i = page*10;
-			if((page+1)*10<files.length)
-			{
-				var limite=(page+1)*10;
-			}
-			else
-			{
-				var limite=files.length
-			}
-			for ( i; i < limite; i++ )
-			{
-				result.push( new TwiitStruct( files[i] ));
-			}
-			var page_maximum=files.length;
-			
+			i = (page * twiitsPerPage);
+			limit = (i + twiitsPerPage < twiits.length)? i + twiitsPerPage : twiits.length;
+			maxPage = Math.floor((twiits.length - 1) / twiitsPerPage);
+			twiits = twiits.reverse();
+			for ( i; i < limit; i++ )
+				result.push( new TwiitStruct( twiits[i] ));
 		}
-		callback(page_maximum,result );
-	});	
-	
+		callback(maxPage, result);
+	});
 };

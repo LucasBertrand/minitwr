@@ -1,30 +1,53 @@
 doctype html
+
 html
+
 	head
-		title #{title}   
+
+		title Page de #{title}   
 		link(href="/images/favicon.png", rel="shortcut icon")
-		link(rel='stylesheet' media='screen and (max-width: 720px)' href='./stylesheets/mobile.css')
-		link(rel='stylesheet' media='screen and (min-width: 720px)' href='./stylesheets/monitor2.css')
-		link(rel='stylesheet' href='./stylesheets/common.css')
+		link(rel='stylesheet' href='./stylesheets/styles.css')
+		link(rel='stylesheet' href='./stylesheets/styles_twiitPage.css')
+		script(src="socket.io/socket.io.js")
+		script(src="./javascripts/index.js")
+
 	body
+
 		a(href="/?page=0")
-				img(src="/images/logo_cigogne.png" class="logo")
-		a(href="/?page="+page) Retour page #{page}
+			img(src="/images/logo_cigogne.png" class="logo")
+
+		br
+
+		a(href="/?page="+page ) Retour
+
 		p(class="date")=date
-		a(href="/search?user=#{name}") #{name}
-		p a twiiter:
+
+		p
+			a(href="/search?user=#{name}") #{name}
+			|  a twiiter:
+
 		a(href=img)
 			img(src=img class="image_twiit")
+
 		p(class="message")=message
 
-		p Commentaire:
-		ul
+		br
+
+		h2 Commentaires :
+
+		ul(class="comment-list")
 			each comment in comments
 				li=comment
-		form(action='/stock_comment', method="POST")
-			input(type="text" placeholder="Votre pseudo" name="user" class="user")
-			textarea(name="commentaire" placeholder="Votre commentaire" class="commentaire")
-			input(type="text" value=twiit name="twiit" class="hide" readonly)
-			input(type="text" value=page name="page"  class="hide" readonly)
-			button(type="submit") Envoyer
+
+		form(action='/stock_comment', method="POST" class="form-comment")
+			input(type="text" placeholder="Your nickname (Optionnal)" name="user" class="input-username")
+			textarea( name="commentaire" placeholder="Your comment" class="input-comment")
+			input(type="hidden" value=twiit name="twiit" readonly)
+			input(type="hidden" value=page name="page"  readonly)
+			button(type="submit") Send
 		
+		div(class="ws" id="connected-users")
+		div(id="oModal" class="cModal")
+			h2(id="popupName")
+			a(id="goToTwiit") See the twiit
+			img(src="images/close-icon.png" id="close")
