@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('minitwr:server');
 var http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -28,6 +29,25 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Initialize WebSockets
+ */
+var io = require('socket.io').listen(server);
+var connections = 0;
+io.on('connection', function(socket) {
+  connections++;
+  io.sockets.emit("traffic-info", connections);
+  socket.on("twiitCreated", function(content) {
+    console.log("OKOKOKOKOKOKO")
+    socket.broadcast.emit('newTwiit', content);
+  });
+  socket.on('disconnect', function () {
+    connections--;
+    io.sockets.emit("traffic-info", connections);
+  });
+});
+
 
 /**
  * Normalize a port into a number, string, or false.

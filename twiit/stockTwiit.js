@@ -1,43 +1,53 @@
 var fs = require( 'fs' );
 
-/* Receive twiit's data from the client, create a txt file and store it 
- * in ./twiit/data
+/* Receive twiit's data from the client, create a txt file and store it in ./twiit/data
  * The name of the files is the timestamp of submitted twiit
- * 
- * @param callback {Function} the callback function
+ *
+ * @param body - the submitted information
+ * @param files - contain optional image from the client
+ * @param callback
  */
 module.exports = function ( body, files, callback )
 {
-	var date=Date.now();
-	console.log("+++++++++++++++++++++++++++++++++++++++OUI CA ENREGISTRE");
-	console.log("====================================>",io);
-	var path = __dirname+ "/data/" + date+ ".txt";
-	if (files.image) 
+	var path = __dirname + "/data/" + body.date + ".txt";
+	var content;
+
+	if (files && files.image)
 	{
-		var content = "[" + body.user_name + "]" + "{/images/image_twiit/"+files.image.name + "}" + body.twiit + "BOC";
-		fs.writeFile( path, content, function( error )
-		{		
+		// Here "BOC" mean Begin Of Comments, see stockcomment.js
+		content = "[" + body.user_name + "]" + "{/images/image_twiit/" + files.image.name + "}" + body.twiit + "BOC";
+
+		fs.writeFile( path, content, function( err )
+		{
+			if (err) throw err;
 			fs.readFile(files.image.path, function (err, data)
 			{
- 				var newPath =files.image.path;
-  				fs.writeFile(newPath, data, function (error)
+				if (err) throw err;
+ 				var newPath = files.image.path;
+  				fs.writeFile(newPath, data, function (err)
 				{
-					var twiit={};
-					twiit.date = date;
+					if (err) {
+						return callback(err);
+					}
+					var twiit = {};
+					twiit.date = new Date(body.date);
 					twiit.name = body.user_name;
-					twiit.img =  "/images/image_twiit/"+files.image.name;
+					twiit.img = "/images/image_twiit/" + files.image.name;
 					twiit.message = body.twiit;
-					twiit.filename=path;
-					callback( error );
+					twiit.filename = path;
+					return callback();
 				});
 			});
 		});
 	}
 	else 
 	{
-		var content = "[" + body.user_name + "]" + "{}" + body.twiit+"BOC";
-		fs.writeFile( path, content, function( error ) {	
-			callback( error );
+		content = "[" + body.user_name + "]" + "{}" + body.twiit + "BOC";
+		fs.writeFile( path, content, function( err ) {
+			if (err) {
+				return callback(err);
+			}
+			return callback();
 		});
 	}
 };
