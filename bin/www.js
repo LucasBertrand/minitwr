@@ -39,7 +39,6 @@ io.on('connection', function(socket) {
   connections++;
   io.sockets.emit("traffic-info", connections);
   socket.on("twiitCreated", function(content) {
-    console.log("OKOKOKOKOKOKO")
     socket.broadcast.emit('newTwiit', content);
   });
   socket.on('disconnect', function () {
