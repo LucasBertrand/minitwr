@@ -1,17 +1,24 @@
 doctype html
+
 html
+
 	head
+
 		title Page de #{title}   
 		link(href="/images/favicon.png", rel="shortcut icon")
 		link(rel='stylesheet' href='./stylesheets/styles.css')
-		link(rel='stylesheet' media='screen and (min-width: 720px)' href='./stylesheets/styles_searchPage.css')
+		link(rel='stylesheet' href='./stylesheets/styles_searchPage.css')
+		script(src="socket.io/socket.io.js")
+		script(src="./javascripts/index.js")
+
 	body
+
 		a(href="/?page=0")
-				img(src="/images/logo_cigogne.png" class="logo")
-		if(taille==0)
-			h1 L'utilisateur n'existe pas
+				img(src="/images/logo_cigogne.png" class="logo-link")
+		if(!result.length)
+			h1 User does not exist
 		else
-			h2 Liste des twiits de #{title} :
+			h2 #{name}'s twiits list :
 			ul
 				each twiit in result
 					li(class="twiits")
@@ -23,3 +30,6 @@ html
 						p(class="message")=twiit.message
 						p(class="date")=twiit.date
 		
+		div(class="ws" id="connected-users")
+		div(id="oModal" class="cModal")
+			a(id="goToTwiit")

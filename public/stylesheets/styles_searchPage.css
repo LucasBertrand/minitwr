@@ -1,4 +1,12 @@
-li
-{
-	list-style:none;
+ul {
+    padding: 30px;
+}
+
+.logo-link {
+    margin: auto;
+    margin-top: 60px;
+    display: block;
+    width: 202px;
+    height: 198px;
+    background-image: url("../images/logo_cigogne.png");
 }

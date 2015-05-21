@@ -1,0 +1,48 @@
+section {
+    box-sizing: border-box;
+    padding: 30px;
+    text-align: center;
+    display: table-row;
+}
+
+.twiit-list {
+    box-sizing: border-box;
+    padding: 0px 60px 30px 0px;
+    display: table-cell;
+    vertical-align: top;
+    list-style: none;
+}
+
+.twiits {
+    margin: 30px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+
+#formulaire, #search-panel {
+    margin: 30px;
+    padding: 30px;
+
+    -moz-box-shadow: 1px 1px 5px 0px #9b9b9b;
+    -webkit-box-shadow: 1px 1px 5px 0px #9b9b9b;
+    -o-box-shadow: 1px 1px 5px 0px #9b9b9b;
+    box-shadow: 1px 1px 5px 0px #9b9b9b;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#9b9b9b, Direction=134, Strength=5);
+
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#formulaire {
+    margin-top: 50px;
+}
+
+#search-panel {
+    margin-bottom: 0;
+}
+

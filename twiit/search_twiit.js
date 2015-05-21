@@ -1,39 +1,27 @@
 var fs=require('fs');
+var twiitStruct = require("./twiitStruct");
 
-function TwiitStruct ( path )
+module.exports=function(user, callback)
 {
-	// load data thanks to path and extract content
-	var data = fs.readFileSync( __dirname + "/data/" + path, "utf8" );
-	if ( data )
-	{
-		this.date = new Date( parseInt( path.replace(/.txt/, "" ))).toLocaleString();
-		this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
-		this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
-		this.message = data.slice( data.indexOf( "}" ) + 1, data.indexOf( "BOC" ));
-		this.filename=path;
-	}		
-}
-
-module.exports=function(user,callback)
-{
-	
-	fs.readdir( __dirname + "/data/", function( error, files )
+	fs.readdir( __dirname + "/data/", function( error, twiits )
 	{
 		if ( error ) throw error;
-		if ( files )
+		if ( twiits )
 		{
-			files=files.reverse();
+			twiits = twiits.reverse();
 			var twiit;
-			var result = []; 
-			for ( var i=0; i < files.length; i++ )
+			var result = [];
+
+			for ( var i=0; i < twiits.length; i++ )
 			{
-				twiit=new TwiitStruct(files[i]);
-				if(twiit.name==user)
+				twiit = new twiitStruct(twiits[i]);
+				if(twiit.name === user)
 				{
 					result.push(twiit);
 				}
 			}
 		}
 		callback(result);
-	});	
-}
+	});
+
+};

@@ -24,11 +24,15 @@ socket.on("traffic-info", updateUsersCount);
 socket.on("newTwiit", showPopup);
 
 // The section panel will follow the user-scrolling
+// Currently bugged : infinite scroll
 window.onscroll = function(event) {
-	var topOffset = window.pageYOffset + 20;
-	var formulaire = document.getElementById('formulaire');
-	if (formulaire) formulaire.style.marginTop = topOffset + "px";
+	if (window.innerWidth > 750) {
+		var topOffset = window.pageYOffset + 20;
+		var formulaire = document.getElementById('formulaire');
+		if (formulaire) formulaire.style.marginTop = topOffset + "px";
+	}
 };
+
 
 window.onload = function() {
 

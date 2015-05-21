@@ -19,10 +19,10 @@
 
 	margin: auto;
 	box-sizing: border-box;
-	border: 1px solid #ffffff;
-	min-width: 300px;
+	border: 2px solid #ffffff;
 	padding: 10px;
-	width: 600px;
+	width: 80%;
+	max-width: 600px;
 	border-radius: 5px;
 	margin-bottom: 10px;
 	background-color: rgba(140, 200, 240, 0.4);
@@ -66,14 +66,13 @@
 }
 
 .input-username {
-	margin: auto;
-	display:block;
+	margin: auto auto 10px auto;
+	width: 250px;
 	padding: 5px;
-	margin-bottom: 10px;
-	outline-color: #96BDFF;
+	outline: none;
 	box-sizing: border-box;
 	font-family: Arial, serif;
-	width: 250px;
+	border: 1px dashed #75c2ff;
 }
 
 .form-comment {
@@ -81,3 +80,7 @@
 	margin-bottom: 30px;
 }
 
+.link-image {
+	display: block;
+	margin-bottom: 30px;
+}

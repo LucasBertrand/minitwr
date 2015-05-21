@@ -24,10 +24,11 @@ module.exports = function TwiitStruct ( path )
 {
     // load data thanks to path and extract content
     var data = fs.readFileSync( __dirname + "/data/" + path, "utf8" );
+    var timestamp = parseInt( path.replace(/.txt/, "" ));
     if ( data )
     {
-        this.date = parseInt( path.replace(/.txt/, "" ));
-        this.elapsed = insertTimeElapsed(this.date);
+        this.elapsed = insertTimeElapsed(timestamp);
+        this.date = new Date(timestamp).toLocaleString();
         this.name = data.slice( data.indexOf( "[" ) + 1, data.indexOf( "]" ));
         this.img = data.slice( data.indexOf("{")+1,data.indexOf("}"));
         this.message = data.slice( data.indexOf( "}" ) + 1, data.indexOf( "BOC" ));

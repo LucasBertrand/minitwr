@@ -91,11 +91,11 @@ router.post("/new_twiit", function(req, res, next)
 router.get("/twiit_page", function(req, res, next)
 {
 	var url = req.query.twiit;
-	twiit_page(url, function(file){
-		file.title = "Twiit de " + file.name;
-		file.twiit = url;
-		file.page = req.query.page;
-		res.render("twiit_page", file);
+	twiit_page(url, function(twiit){
+		twiit.title = "Twiit de " + twiit.name;
+		twiit.twiit = url;
+		twiit.page = req.query.page;
+		res.render("twiit_page", twiit);
 	});
 });
 
@@ -108,29 +108,26 @@ router.post("/stock_comment", function(req, res, next)
 	} else {
 		res.redirect("twiit_page?twiit=" + req.body.twiit + "&page=" + req.body.page);
 	}
-
 });
 
 router.get('/search',function(req,res,next)
 {
-	search_twiit(req.query.user,function(result)
+	search_twiit(req.query.user, function(twiits)
 	{
 		var data={};
-		data.result=result;
-		data.title=req.query.user;
-		data.taille=result.length;
+		data.name = req.query.user;
+		data.result = twiits;
 		res.render('search_page',data);
 	});
 });
 
 router.post('/search_POST',function(req,res,next)
 {
-	search_twiit(req.body.user,function(result)
+	search_twiit(req.body.user,function(twiits)
 	{
 		var data={};
-		data.result=result;
-		data.title=req.body.user;
-		data.taille=result.length;
+		data.name = req.body.user;
+		data.result = twiits;
 		res.render('search_page',data);
 	});
 });

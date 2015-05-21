@@ -20,21 +20,16 @@ module.exports = function ( body, files, callback )
 		fs.writeFile( path, content, function( err )
 		{
 			if (err) throw err;
+			// save image
 			fs.readFile(files.image.path, function (err, data)
 			{
 				if (err) throw err;
- 				var newPath = files.image.path;
-  				fs.writeFile(newPath, data, function (err)
+ 				var imgPath = files.image.path;
+  				fs.writeFile(imgPath, data, function (err)
 				{
 					if (err) {
 						return callback(err);
 					}
-					var twiit = {};
-					twiit.date = new Date(body.date);
-					twiit.name = body.user_name;
-					twiit.img = "/images/image_twiit/" + files.image.name;
-					twiit.message = body.twiit;
-					twiit.filename = path;
 					return callback();
 				});
 			});

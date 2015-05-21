@@ -14,19 +14,21 @@ html
 	body
 
 		a(href="/?page=0")
-			img(src="/images/logo_cigogne.png" class="logo")
+			img(src="/images/logo_cigogne.png" class="logo-link")
 
 		br
 
 		a(href="/?page="+page ) Retour
 
-		p(class="date")=date
+		p(class="date")= date
 
-		p
-			a(href="/search?user=#{name}") #{name}
-			|  a twiiter:
+		a(href="/search?user=#{name}" class="name") #{name}
+		| 's twiit :
 
-		a(href=img)
+		br
+		br
+
+		a(href=img class="link-image")
 			img(src=img class="image_twiit")
 
 		p(class="message")=message
@@ -48,6 +50,4 @@ html
 		
 		div(class="ws" id="connected-users")
 		div(id="oModal" class="cModal")
-			h2(id="popupName")
-			a(id="goToTwiit") See the twiit
-			img(src="images/close-icon.png" id="close")
+			a(id="goToTwiit")
