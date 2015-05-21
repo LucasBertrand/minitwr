@@ -33,3 +33,6 @@ We are studying computer science at the University of Strasbourg.
 * Jade
 > A preprocessor for light HTML
 
+* Multer
+> Middleware for handling multipart/form-data
+
