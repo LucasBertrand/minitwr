@@ -21,14 +21,15 @@ html
 			h2 #{name}'s twiits list :
 			ul
 				each twiit in result
-					li(class="twiits")
-						a(href="twiit_page?twiit="+twiit.filename+"&page="+page)
+					a(href="twiit_page?twiit="+twiit.filename+"&page="+page class="twiit-link")
+
+						li(class="twiits")
+
 							p(class="name")=twiit.name
-						if twiit.img != ""
-							a(href=twiit.img)
+							if twiit.img != ""
 								img(src=twiit.img class="image_twiit")
-						p(class="message")=twiit.message
-						p(class="date")=twiit.date
+							p(class="message")=twiit.message
+							p(class="date")=twiit.date
 		
 		div(class="ws" id="connected-users")
 		div(id="oModal" class="cModal")
